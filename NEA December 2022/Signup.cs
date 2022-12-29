@@ -74,5 +74,13 @@ namespace NEA_December_2022
                 MessageBox.Show("Passwords Do Not Match");
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var Form = new Form1();
+            this.Hide();
+            Form.Show();
+            Form.BackColor = this.BackColor;
+        }
     }
 }

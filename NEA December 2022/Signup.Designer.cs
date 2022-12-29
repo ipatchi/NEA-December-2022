@@ -39,6 +39,8 @@
             this.InputPassword1 = new System.Windows.Forms.TextBox();
             this.InputPassword2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -68,6 +70,8 @@
             this.flowLayoutPanel1.Controls.Add(this.InputPassword1);
             this.flowLayoutPanel1.Controls.Add(this.InputPassword2);
             this.flowLayoutPanel1.Controls.Add(this.button1);
+            this.flowLayoutPanel1.Controls.Add(this.label3);
+            this.flowLayoutPanel1.Controls.Add(this.button2);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
@@ -153,6 +157,25 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 198);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(218, 15);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Already Have An Account? Sign In Here:";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(3, 216);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(131, 23);
+            this.button2.TabIndex = 16;
+            this.button2.Text = "Log In";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Signup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -183,5 +206,7 @@
         private FlowLayoutPanel flowLayoutPanel2;
         private Label label2;
         private NumericUpDown InputAge;
+        private Label label3;
+        private Button button2;
     }
 }

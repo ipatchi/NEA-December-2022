@@ -16,20 +16,10 @@ namespace NEA_December_2022
 {
     public partial class MainMenu : Form
     {
-        public MainMenu(int ID2)
+        public MainMenu(int ID)
         {
             InitializeComponent();
-            ID = ID2;
-
-            
-            
-
-
-
-
-            
-            
-            
+               
         }
 
         public int ID;
@@ -40,6 +30,7 @@ namespace NEA_December_2022
             form.Show();
             this.Hide();
             form.BackColor = this.BackColor;
+            
         }
     }
 }
