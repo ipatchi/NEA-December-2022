@@ -16,9 +16,10 @@ namespace NEA_December_2022
 {
     public partial class MainMenu : Form
     {
-        public MainMenu(int ID)
+        public MainMenu(int ID2)
         {
             InitializeComponent();
+            ID = ID2;
                
         }
 

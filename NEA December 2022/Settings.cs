@@ -41,6 +41,7 @@ namespace NEA_December_2022
             var command = con.CreateCommand();
             string sql = "UPDATE Users SET BGColour = '"+colorDialog1.Color+"' WHERE ID = '" + ID + "';";
             command.CommandText = sql;
+            label1.Text = sql;
             
             command.ExecuteNonQuery();
 
