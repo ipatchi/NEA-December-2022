@@ -15,6 +15,11 @@ namespace NEA_December_2022
         public Create()
         {
             InitializeComponent();
+            make();
+        }
+        public void make()
+        {
+            menuStrip1.DoDragDrop(this, DragDropEffects.Move);
         }
     }
 }
