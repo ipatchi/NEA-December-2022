@@ -25,7 +25,13 @@ namespace NEA_December_2022
                 if (!(string.IsNullOrEmpty(InputPassword2.Text) | string.IsNullOrEmpty(InputPassword1.Text) | string.IsNullOrEmpty(InputUsername.Text) | string.IsNullOrEmpty(InputName.Text)))
                 {
                     List<string> usernames = new List<string>();
-                    SqliteConnection con = new SqliteConnection("Data Source = Revision.db;");
+
+                    //---------------------------------------------------------------
+                    string where = Directory.GetCurrentDirectory();
+                    SqliteConnection con = new SqliteConnection("Data Source = " + where + "/Revision.db;");
+                    label1.Text = where;
+                    //---------------------------------------------------------------
+
                     con.Open();
                     string sql = "SELECT ID FROM Users WHERE Username = '"+InputUsername.Text+"';";
                     using var cmd = new SqliteCommand(sql, con);

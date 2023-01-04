@@ -14,7 +14,16 @@ namespace NEA_December_2022
             string password = InputPassword.Text;
             string username = InputUsername.Text;
             List <string> passwords = new List<string>();
-            SqliteConnection con = new SqliteConnection("Data Source = Revision.db;");
+
+            string where = Directory.GetCurrentDirectory();
+            where = where.Substring(0, where.Length - 24);
+            label1.Text = where;
+            SqliteConnection con = new SqliteConnection("Data Source = "+ where +"/Revision.db;");
+            //SqliteConnection con = new SqliteConnection("Data Source = Revision.db;");
+
+
+
+
             con.Open();
             string sql = "SELECT password FROM users WHERE username = '" + username +"';";
             using var cmd = new SqliteCommand(sql, con);
