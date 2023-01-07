@@ -19,7 +19,15 @@ namespace NEA_December_2022
         }
         public void make()
         {
-            menuStrip1.DoDragDrop(this, DragDropEffects.Move);
+            
+        }
+
+        public class card
+        {
+            public int id;
+            public string backcolour;
+            public string type;
+
         }
     }
 }
