@@ -17,7 +17,6 @@ namespace NEA_December_2022
 
             string where = Directory.GetCurrentDirectory();
             where = where.Substring(0, where.Length - 24);
-            label1.Text = where;
             SqliteConnection con = new SqliteConnection("Data Source = "+ where +"/Revision.db;");
             //SqliteConnection con = new SqliteConnection("Data Source = Revision.db;");
 
@@ -53,7 +52,11 @@ namespace NEA_December_2022
 
                     // - Get the users Background colour using this ID
                     List<string> colours = new List<string>();
-                    SqliteConnection con3 = new SqliteConnection("Data Source = Revision.db;");
+
+                    where = Directory.GetCurrentDirectory();
+                    where = where.Substring(0, where.Length - 24);
+                    SqliteConnection con3 = new SqliteConnection("Data Source = " + where + "/Revision.db;");
+
                     con3.Open();
                     string sql3 = "SELECT BGColour FROM users WHERE ID = '" + ID + "';";
                     using var cmd3 = new SqliteCommand(sql3, con3);

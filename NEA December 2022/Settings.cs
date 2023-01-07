@@ -36,7 +36,11 @@ namespace NEA_December_2022
         {
             colorDialog1.ShowDialog();
             this.BackColor = colorDialog1.Color;
-            SqliteConnection con = new SqliteConnection("Data Source = Revision.db;");
+
+            string where = Directory.GetCurrentDirectory();
+            where = where.Substring(0, where.Length - 24);
+            SqliteConnection con = new SqliteConnection("Data Source = " + where + "/Revision.db;");
+
             con.Open();
             var command = con.CreateCommand();
             string sql = "UPDATE Users SET BGColour = '"+colorDialog1.Color+"' WHERE ID = '" + ID + "';";

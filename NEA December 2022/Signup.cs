@@ -27,8 +27,11 @@ namespace NEA_December_2022
                     List<string> usernames = new List<string>();
 
                     //---------------------------------------------------------------
+
                     string where = Directory.GetCurrentDirectory();
+                    where = where.Substring(0, where.Length - 24);
                     SqliteConnection con = new SqliteConnection("Data Source = " + where + "/Revision.db;");
+
                     label1.Text = where;
                     //---------------------------------------------------------------
 
