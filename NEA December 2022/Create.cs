@@ -15,19 +15,21 @@ namespace NEA_December_2022
         public Create()
         {
             InitializeComponent();
-            make();
-        }
-        public void make()
-        {
             
         }
+     
 
-        public class card
+        private void Create_Load(object sender, EventArgs e)
         {
-            public int id;
-            public string backcolour;
-            public string type;
 
+                    }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var form = new CreateQA();
+            form.Open();
+            this.Hide();
+            form.Backcolor = this.BackColor;
         }
     }
 }
