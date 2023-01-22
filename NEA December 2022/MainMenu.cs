@@ -41,5 +41,13 @@ namespace NEA_December_2022
             this.Hide();
             form.BackColor = this.BackColor;
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var form = new Explore();
+            form.Show();
+            this.Hide();
+            form.BackColor = this.BackColor;
+        }
     }
 }
