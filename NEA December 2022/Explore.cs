@@ -16,8 +16,6 @@ namespace NEA_December_2022
     public partial class Explore : Form
     {
 
-        
-
         public Explore()
         {
             List<string> Questions = new List<string>();
@@ -40,14 +38,20 @@ namespace NEA_December_2022
                 CIDs.Add(reader.GetInt32(2));
             }
 
+            label1.BackColor = Color.AliceBlue;
+
             ShowQuestions(Questions, IDs, CIDs);
 
             
-
         }
 
-        public void ShowQuestions(List<string> Questions, List<int> IDs, List<int> CreatorIDs)
+        public void ShowQuestions(List<string> Questions1, List<int> IDs1, List<int> CreatorIDs1)
         {
+            string[] Questions = Questions1.ToArray();
+            int[] IDs = IDs1.ToArray();
+            int[] CreatorIDs = CreatorIDs1.ToArray();
+
+            /*
             DataTable table = new DataTable();
             DataColumn dtcolumn;
             DataRow mydatarow;
@@ -65,7 +69,7 @@ namespace NEA_December_2022
             table.Columns.Add(dtcolumn);
 
 
-           for (int i = 0; i < Questions.Count; i++)
+           for (int i = 0; i < Questions.Length; i++)
             {
                 mydatarow = table.NewRow();
                 mydatarow["Question"] = Questions[i];
@@ -73,8 +77,11 @@ namespace NEA_December_2022
                 mydatarow["Creator ID"] = CreatorIDs[i];
                 table.Rows.Add(mydatarow);
             }
+            */
+
             
-           label1.Text = IDs.Count.ToString();
+
+           //label1.Text = Questions.Length.ToString();
 
             //dataGridView1.DataSource = table;
         }
