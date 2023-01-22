@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.Sqlite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -77,7 +78,57 @@ namespace NEA_December_2022
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (!(string.IsNullOrEmpty(InputQ.Text) | string.IsNullOrEmpty(InputAns.Text)))
+            {
+                
 
+                //---------------------------------------------------------------
+
+                string where = Directory.GetCurrentDirectory();
+                where = where.Substring(0, where.Length - 24);
+                SqliteConnection con = new SqliteConnection("Data Source = " + where + "/Revision.db;");
+
+                string Question = InputQ.Text;
+                string Answer = InputAns.Text;
+                string QuestionBGColour = Convert.ToString(InputQ.BackColor);
+                string QuestionFGColour = Convert.ToString(InputQ.ForeColor);
+                string AnswerBGColour = Convert.ToString(InputAns.BackColor);
+                string AnswerFGColour = Convert.ToString(InputAns.ForeColor);
+
+                string QuestionFont = Convert.ToString(InputQ.Font);
+                string AnswerFont = Convert.ToString(InputAns.Font);
+
+                DateTime now = DateTime.Now;
+                string Modified = Convert.ToString(now);
+
+                int CID = 0;
+                int Marks = 0;
+
+
+
+                con.Open();
+                var command = con.CreateCommand();
+                string sql2 = "INSERT into Flashcards (Question, Answer, Modified, CreatorID, Marks, QuestionBG, QuestionFG, AnswerBG, AnswerFG, AFont, QFont) " +
+                    "VALUES ('" + Question + "','" + Answer + "','" + Modified + "','" + CID + "','" + Marks + "','" + QuestionBGColour + "','"
+                    + QuestionFGColour + "','" + AnswerBGColour + "','" + AnswerFGColour + "','" + QuestionFont + "','" + AnswerFont + "');";
+                command.CommandText = sql2;
+                command.ExecuteNonQuery();
+
+                con.Close();
+                MessageBox.Show("Question Created Successfully");
+
+                var Form = new Create();
+                this.Hide();
+                Form.Show();
+                Form.BackColor = this.BackColor;
+                
+
+            }
+            else
+            {
+                MessageBox.Show("Please Fill In All Fields");
+            }
         }
     }
+    
 }

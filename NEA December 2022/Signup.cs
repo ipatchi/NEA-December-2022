@@ -32,7 +32,7 @@ namespace NEA_December_2022
                     where = where.Substring(0, where.Length - 24);
                     SqliteConnection con = new SqliteConnection("Data Source = " + where + "/Revision.db;");
 
-                    label1.Text = where;
+                   
                     //---------------------------------------------------------------
 
                     con.Open();

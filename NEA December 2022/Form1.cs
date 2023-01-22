@@ -66,45 +66,11 @@ namespace NEA_December_2022
                         colours.Add(reader3.GetString(0));
                     }
 
-                    //Find what background colour type they use, and manipulate the background colour into this
-                    if (colours[0] != "DEFAULT")
-                    {
-                        bool argbformat = false;
-                        foreach (char character in colours[0])
-                        {
-                            if (character == ',')
-                            {
-                                argbformat = true;
-                            }
-                        }
-                        if (argbformat)
-                        {
-                            string colourstring = colours[0];
+                    NEAString Converter = new NEAString();
+                    this.BackColor = Converter.TranslateColour(colours[0]);
 
-                            colourstring = colourstring.Substring(7, colourstring.Length - 8);
-                            label1.Text = colourstring;
 
-                            string[] parts = new string[4];
-                            parts = colourstring.Split(',');
-
-                            for (int i = 0; i < parts.Length; i++)
-                            {
-                                parts[i] = parts[i].Substring(3, parts[i].Length - 3);
-                            }
-
-                            this.BackColor = Color.FromArgb(255, Convert.ToInt32(parts[1]),
-                                Convert.ToInt32(parts[2]), Convert.ToInt32(parts[3]));
-                        }
-                        else
-                        {
-                            string colourstring = colours[0];
-
-                            colourstring = colourstring.Substring(7, colourstring.Length - 8);
-                            label1.Text = colourstring;
-                            this.BackColor = ColorTranslator.FromHtml(colourstring);
-                        }
-
-                    }
+                 
                     con3.Close();
 
                     
