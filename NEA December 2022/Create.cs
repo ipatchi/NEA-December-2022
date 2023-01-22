@@ -27,9 +27,9 @@ namespace NEA_December_2022
         private void button1_Click(object sender, EventArgs e)
         {
             var form = new CreateQA();
-            form.Open();
+            form.Show();
             this.Hide();
-            form.Backcolor = this.BackColor;
+            form.BackColor = this.BackColor;
         }
     }
 }
