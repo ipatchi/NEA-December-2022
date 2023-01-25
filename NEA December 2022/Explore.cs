@@ -18,6 +18,8 @@ namespace NEA_December_2022
 
         public Explore()
         {
+            InitializeComponent();
+
             List<string> Questions = new List<string>();
             List<int> IDs = new List<int>();
             List<int> CIDs = new List<int>();
@@ -87,6 +89,11 @@ namespace NEA_December_2022
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }
