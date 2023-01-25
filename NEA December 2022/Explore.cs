@@ -20,6 +20,8 @@ namespace NEA_December_2022
         {
             InitializeComponent();
 
+            
+
             List<string> Questions = new List<string>();
             List<int> IDs = new List<int>();
             List<int> CIDs = new List<int>();
@@ -40,7 +42,6 @@ namespace NEA_December_2022
                 CIDs.Add(reader.GetInt32(2));
             }
 
-            label1.BackColor = Color.AliceBlue;
 
             ShowQuestions(Questions, IDs, CIDs);
 
@@ -53,7 +54,7 @@ namespace NEA_December_2022
             int[] IDs = IDs1.ToArray();
             int[] CreatorIDs = CreatorIDs1.ToArray();
 
-            /*
+            
             DataTable table = new DataTable();
             DataColumn dtcolumn;
             DataRow mydatarow;
@@ -79,18 +80,16 @@ namespace NEA_December_2022
                 mydatarow["Creator ID"] = CreatorIDs[i];
                 table.Rows.Add(mydatarow);
             }
-            */
-
             
-
-           //label1.Text = Questions.Length.ToString();
-
-            //dataGridView1.DataSource = table;
+            dataGridView1.DataSource = table;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0 || e.ColumnIndex != 0) return;
+            this.BackColor= Color.Blue;
 
+            label1.Text = Convert.ToString(dataGridView1[e.ColumnIndex + 1, e.RowIndex]);
         }
 
         private void label1_Click(object sender, EventArgs e)

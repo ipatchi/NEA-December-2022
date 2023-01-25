@@ -39,6 +39,7 @@
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.InputAns = new System.Windows.Forms.RichTextBox();
@@ -47,11 +48,14 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.Font = new System.Windows.Forms.ToolStripButton();
             this.CreateButton = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.colorDialog3 = new System.Windows.Forms.ColorDialog();
             this.colorDialog4 = new System.Windows.Forms.ColorDialog();
+            this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.fontDialog2 = new System.Windows.Forms.FontDialog();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -120,10 +124,11 @@
             this.toolStripButton5,
             this.toolStripButton6,
             this.toolStripButton7,
-            this.toolStripButton8});
+            this.toolStripButton8,
+            this.toolStripButton10});
             this.toolStrip2.Location = new System.Drawing.Point(0, 177);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(104, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(127, 25);
             this.toolStrip2.TabIndex = 4;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -168,6 +173,16 @@
             this.toolStripButton8.Text = "Font -";
             this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click_1);
             // 
+            // toolStripButton10
+            // 
+            this.toolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton10.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton10.Image")));
+            this.toolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton10.Name = "toolStripButton10";
+            this.toolStripButton10.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton10.Text = "Font";
+            this.toolStripButton10.Click += new System.EventHandler(this.toolStripButton10_Click);
+            // 
             // flowLayoutPanel3
             // 
             this.flowLayoutPanel3.BackColor = System.Drawing.SystemColors.AppWorkspace;
@@ -203,10 +218,11 @@
             this.toolStripButton1,
             this.toolStripButton4,
             this.toolStripButton2,
-            this.toolStripButton3});
+            this.toolStripButton3,
+            this.Font});
             this.toolStrip1.Location = new System.Drawing.Point(0, 177);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(104, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(158, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -250,6 +266,16 @@
             this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton3.Text = "Font -";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
+            // 
+            // Font
+            // 
+            this.Font.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Font.Image = ((System.Drawing.Image)(resources.GetObject("Font.Image")));
+            this.Font.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Font.Name = "Font";
+            this.Font.Size = new System.Drawing.Size(23, 22);
+            this.Font.Text = "Font";
+            this.Font.Click += new System.EventHandler(this.toolStripButton9_Click);
             // 
             // CreateButton
             // 
@@ -308,5 +334,9 @@
         private ToolStripButton toolStripButton8;
         private ColorDialog colorDialog3;
         private ColorDialog colorDialog4;
+        private FontDialog fontDialog1;
+        private ToolStripButton Font;
+        private ToolStripButton toolStripButton10;
+        private FontDialog fontDialog2;
     }
 }

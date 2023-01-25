@@ -129,6 +129,18 @@ namespace NEA_December_2022
                 MessageBox.Show("Please Fill In All Fields");
             }
         }
+
+        private void toolStripButton9_Click(object sender, EventArgs e)
+        {
+            fontDialog1.ShowDialog();
+            InputAns.Font = fontDialog1.Font;
+        }
+
+        private void toolStripButton10_Click(object sender, EventArgs e)
+        {
+            fontDialog2.ShowDialog();
+            InputQ.Font = fontDialog2.Font;
+        }
     }
     
 }
