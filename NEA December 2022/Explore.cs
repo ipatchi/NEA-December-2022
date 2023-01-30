@@ -87,9 +87,38 @@ namespace NEA_December_2022
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex != 0) return;
-            this.BackColor= Color.Blue;
 
-            label1.Text = Convert.ToString(dataGridView1[e.ColumnIndex + 1, e.RowIndex]);
+            label1.Text = Convert.ToString(dataGridView1[e.ColumnIndex + 2, e.RowIndex ].FormattedValue);
+            int ID = Convert.ToInt16(dataGridView1[e.ColumnIndex + 2, e.RowIndex].FormattedValue);
+
+            string where = Directory.GetCurrentDirectory();
+            where = where.Substring(0, where.Length - 24);
+            SqliteConnection con = new SqliteConnection("Data Source = " + where + "/Revision.db;");
+
+            con.Open();
+            
+
+            string sql = "SELECT Question,Answer,QuestionBG,QuestionFG FROM flashcards WHERE ID = '"+ ID+" ';";
+            using var cmd = new SqliteCommand(sql, con);
+            using SqliteDataReader reader = cmd.ExecuteReader();
+            string Question = "";
+            string Answer = "";
+            string BGColour = "";
+            string FGColour = "";
+            while (reader.Read())
+            {
+                Question = reader.GetString(0);
+                Answer = reader.GetString(1);
+                BGColour = reader.GetString(2);
+                FGColour = reader.GetString(3);
+
+            }
+            var form = new PlayQA();
+            form.Show();
+            form.viewQA(Question, Answer, BGColour, FGColour);
+
+
+
         }
 
         private void label1_Click(object sender, EventArgs e)

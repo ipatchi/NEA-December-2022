@@ -38,6 +38,12 @@ namespace NEA_December_2022
                 {
                     //Password is correct so gains access:
 
+                    //---------------------------------------------------------
+
+
+
+
+
                     // - Get the Users ID (Useful in parts of the program)
                     List<string> IDs = new List<string>();
                     string sql2 = "SELECT ID FROM users WHERE username = '" + username + "' AND password = '"+password+"';";
