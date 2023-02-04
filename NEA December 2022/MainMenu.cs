@@ -44,7 +44,7 @@ namespace NEA_December_2022
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var form = new Explore();
+            var form = new Explore(ID);
             form.Show();
             this.Hide();
             form.BackColor = this.BackColor;

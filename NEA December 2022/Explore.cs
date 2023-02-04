@@ -15,11 +15,11 @@ namespace NEA_December_2022
 {
     public partial class Explore : Form
     {
-
-        public Explore()
+        public int id;
+        public Explore(int ID)
         {
             InitializeComponent();
-
+            id = ID;
             
 
             List<string> Questions = new List<string>();
@@ -44,7 +44,7 @@ namespace NEA_December_2022
 
 
             ShowQuestions(Questions, IDs, CIDs);
-
+            
             
         }
 
@@ -80,7 +80,7 @@ namespace NEA_December_2022
                 mydatarow["Creator ID"] = CreatorIDs[i];
                 table.Rows.Add(mydatarow);
             }
-            
+            dataGridView1.BackgroundColor = this.BackColor;
             dataGridView1.DataSource = table;
         }
 
@@ -88,7 +88,7 @@ namespace NEA_December_2022
         {
             if (e.RowIndex < 0 || e.ColumnIndex != 0) return;
 
-            label1.Text = Convert.ToString(dataGridView1[e.ColumnIndex + 2, e.RowIndex ].FormattedValue);
+           
             int ID = Convert.ToInt16(dataGridView1[e.ColumnIndex + 2, e.RowIndex].FormattedValue);
 
             string where = Directory.GetCurrentDirectory();
@@ -98,32 +98,51 @@ namespace NEA_December_2022
             con.Open();
             
 
-            string sql = "SELECT Question,Answer,QuestionBG,QuestionFG FROM flashcards WHERE ID = '"+ ID+" ';";
+            string sql = "SELECT Question,Answer,QuestionBG,QuestionFG,AnswerBG,AnswerFG,QFont,AFont,Marks FROM flashcards WHERE ID = '"+ ID+" ';";
             using var cmd = new SqliteCommand(sql, con);
             using SqliteDataReader reader = cmd.ExecuteReader();
             string Question = "";
             string Answer = "";
             string BGColour = "";
             string FGColour = "";
+            string ABGColour = "";
+            string AFGColour = "";
+            string QFont = "";
+            string AFont = "";
+            string Marks = "";
+
             while (reader.Read())
             {
                 Question = reader.GetString(0);
                 Answer = reader.GetString(1);
                 BGColour = reader.GetString(2);
                 FGColour = reader.GetString(3);
-
+                ABGColour = reader.GetString(4);
+                AFGColour = reader.GetString(5);
+                QFont = reader.GetString(6);
+                AFont = reader.GetString(7);
+                Marks = reader.GetString(8);
             }
-            var form = new PlayQA();
+            var form = new PlayQA(ID);
             form.Show();
-            form.viewQA(Question, Answer, BGColour, FGColour);
-
-
+            form.BackColor = this.BackColor;
+            form.viewQA(Question, Answer, BGColour, FGColour,ABGColour,AFGColour,QFont,AFont,Marks);
+            this.Close();
+           
 
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var form = new MainMenu(id);
+            form.Show();
+            form.BackColor = this.BackColor;
+            this.Close();
         }
     }
     
