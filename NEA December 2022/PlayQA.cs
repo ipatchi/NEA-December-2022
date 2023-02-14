@@ -16,6 +16,7 @@ namespace NEA_December_2022
         {
             InitializeComponent();
             RealAnswerBox.Visible = false;
+            button2.Visible = false;
             id = ID;
         }
 
@@ -25,12 +26,21 @@ namespace NEA_December_2022
         public void viewQA(string Question, string Answer, String QBG, String QFG,string ABGColour, string AFGColour, 
             string QFont, string AFont, string Marks)
         {
-            NEAString s = new NEAString();
+            NEAFonts s = new NEAFonts();
             OutputQ.Text = Question;
             OutputQ.BackColor = s.TranslateColour(QBG);
             OutputQ.ForeColor = s.TranslateColour(QFG);
             InputA.BackColor = s.TranslateColour(ABGColour);
             InputA.ForeColor = s.TranslateColour(AFGColour);
+            RealAnswerBox.BackColor = s.TranslateColour(ABGColour);
+            RealAnswerBox.ForeColor = s.TranslateColour(AFGColour);
+
+            s.SetFont(QFont);
+            OutputQ.Font = s.GetFontAsFont();
+
+            s.SetFont(AFont);
+            InputA.Font = s.GetFontAsFont();
+            RealAnswerBox.Font = s.GetFontAsFont();
 
             answer = Answer;
         }
@@ -50,9 +60,19 @@ namespace NEA_December_2022
             {
                 MessageBox.Show("Incorrect");
                 RealAnswerBox.Visible = true;
+                button2.Visible = true;
+                button1.Visible = false;
                 RealAnswerBox.Text = answer;
 
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var form = new Explore(id);
+            form.BackColor = this.BackColor;
+            form.Show();
+            this.Close();
         }
     }
 }

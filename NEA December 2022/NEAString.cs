@@ -50,4 +50,30 @@ namespace NEA_December_2022
             return Color.AliceBlue;
         }
     }
+    internal class NEAFonts : NEAString
+    {
+        public string Font = "";
+        public string GetFont()
+        {
+            return Font;
+        }
+
+        public void SetFont(string f)
+        {
+            Font = f;
+        }
+
+        public Font GetFontAsFont()
+        {
+            var Convert = new FontConverter();
+            Font f = Convert.ConvertFromString(Font) as Font;
+            return f;
+        }
+        public string MakeFontString(Font theFont)
+        {
+            var Convert = new FontConverter();
+            String f = Convert.ConvertToString(theFont);
+            return f;
+        }
+    }
 }

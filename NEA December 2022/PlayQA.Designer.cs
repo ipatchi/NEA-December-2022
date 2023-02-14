@@ -33,6 +33,7 @@
             this.InputA = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.RealAnswerBox = new System.Windows.Forms.RichTextBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -48,6 +49,7 @@
             // 
             this.OutputQ.Location = new System.Drawing.Point(12, 12);
             this.OutputQ.Name = "OutputQ";
+            this.OutputQ.ReadOnly = true;
             this.OutputQ.Size = new System.Drawing.Size(381, 156);
             this.OutputQ.TabIndex = 3;
             this.OutputQ.Text = "";
@@ -74,15 +76,27 @@
             // 
             this.RealAnswerBox.Location = new System.Drawing.Point(407, 234);
             this.RealAnswerBox.Name = "RealAnswerBox";
+            this.RealAnswerBox.ReadOnly = true;
             this.RealAnswerBox.Size = new System.Drawing.Size(381, 156);
             this.RealAnswerBox.TabIndex = 6;
             this.RealAnswerBox.Text = "";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(568, 415);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "Move On";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // PlayQA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.RealAnswerBox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.InputA);
@@ -101,5 +115,6 @@
         private RichTextBox InputA;
         private Button button1;
         private RichTextBox RealAnswerBox;
+        private Button button2;
     }
 }

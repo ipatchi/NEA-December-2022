@@ -50,6 +50,8 @@
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.Font = new System.Windows.Forms.ToolStripButton();
             this.CreateButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.MarksInp = new System.Windows.Forms.NumericUpDown();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.colorDialog3 = new System.Windows.Forms.ColorDialog();
@@ -62,12 +64,15 @@
             this.toolStrip2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MarksInp)).BeginInit();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.tableLayoutPanel1);
             this.flowLayoutPanel1.Controls.Add(this.CreateButton);
+            this.flowLayoutPanel1.Controls.Add(this.button1);
+            this.flowLayoutPanel1.Controls.Add(this.MarksInp);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -222,7 +227,7 @@
             this.Font});
             this.toolStrip1.Location = new System.Drawing.Point(0, 177);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(158, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(127, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -287,6 +292,23 @@
             this.CreateButton.UseVisualStyleBackColor = true;
             this.CreateButton.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(192, 249);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(69, 38);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Return";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // MarksInp
+            // 
+            this.MarksInp.Location = new System.Drawing.Point(267, 249);
+            this.MarksInp.Name = "MarksInp";
+            this.MarksInp.Size = new System.Drawing.Size(70, 23);
+            this.MarksInp.TabIndex = 4;
+            // 
             // CreateQA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -305,6 +327,7 @@
             this.flowLayoutPanel3.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MarksInp)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -338,5 +361,8 @@
         private ToolStripButton Font;
         private ToolStripButton toolStripButton10;
         private FontDialog fontDialog2;
+        private Button button1;
+        private NumericUpDown numericUpDown1;
+        private NumericUpDown MarksInp;
     }
 }

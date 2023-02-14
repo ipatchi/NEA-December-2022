@@ -12,8 +12,11 @@ namespace NEA_December_2022
 {   
     public partial class Create : Form
     {
-        public Create()
+
+        public int id = 0;
+        public Create(int ID)
         {
+            id = ID;
             InitializeComponent();
             
         }
@@ -26,7 +29,17 @@ namespace NEA_December_2022
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var form = new CreateQA();
+            var form = new CreateQA(id);
+            form.Show();
+            this.Hide();
+            form.BackColor = this.BackColor;
+            NEAFonts f = new NEAFonts();
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var form = new MainMenu(id);
             form.Show();
             this.Hide();
             form.BackColor = this.BackColor;

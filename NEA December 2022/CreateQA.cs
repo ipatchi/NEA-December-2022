@@ -13,8 +13,10 @@ namespace NEA_December_2022
 {
     public partial class CreateQA : Form
     {
-        public CreateQA()
+        public int id;
+        public CreateQA(int ID)
         {
+            id = ID;
             InitializeComponent();
         }
 
@@ -95,14 +97,16 @@ namespace NEA_December_2022
                 string AnswerBGColour = Convert.ToString(InputAns.BackColor);
                 string AnswerFGColour = Convert.ToString(InputAns.ForeColor);
 
-                string QuestionFont = Convert.ToString(InputQ.Font);
-                string AnswerFont = Convert.ToString(InputAns.Font);
+                NEAFonts s = new NEAFonts();
+
+                string QuestionFont = s.MakeFontString(InputQ.Font);
+                string AnswerFont = s.MakeFontString(InputAns.Font);
 
                 DateTime now = DateTime.Now;
                 string Modified = Convert.ToString(now);
 
-                int CID = 0;
-                int Marks = 0;
+                int CID = id;
+                int Marks = Convert.ToInt16(MarksInp.Value);
 
 
 
@@ -117,7 +121,7 @@ namespace NEA_December_2022
                 con.Close();
                 MessageBox.Show("Question Created Successfully");
 
-                var Form = new Create();
+                var Form = new Create(id);
                 this.Hide();
                 Form.Show();
                 Form.BackColor = this.BackColor;
@@ -140,6 +144,14 @@ namespace NEA_December_2022
         {
             fontDialog2.ShowDialog();
             InputQ.Font = fontDialog2.Font;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            var Form = new Create(id);
+            this.Hide();
+            Form.Show();
+            Form.BackColor = this.BackColor;
         }
     }
     
