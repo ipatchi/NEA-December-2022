@@ -165,6 +165,33 @@ namespace NEA_December_2022
                 form.viewQA(Question, Answer, BGColour, FGColour, ABGColour, AFGColour, QFont, AFont, Marks);
                 this.Close();
             }
+            else if (type == 2)
+            {
+                string sql = "SELECT Question, Marks, RealOpt, Opt2, Opt3, Opt4 FROM MultiChoices WHERE ID = '" + ID + " ';";
+                using var cmd = new SqliteCommand(sql, con);
+                using SqliteDataReader reader = cmd.ExecuteReader();
+                string Question = "";
+                string RealOpt = "";
+                string Opt2 = "";
+                string Opt3 = "";
+                string Opt4 = "";
+                int Marks = 0;
+
+                while (reader.Read())
+                {
+                    Question = reader.GetString(0);
+                    RealOpt = reader.GetString(2);
+                    Opt2 = reader.GetString(3);
+                    Opt3 = reader.GetString(4);
+                    Opt4 = reader.GetString(5);
+                    Marks = Convert.ToInt32(reader.GetValue(1));
+                }
+                var form = new PlayMultiC(ID);
+                form.Show();
+                form.BackColor = this.BackColor;
+                form.LoadQ(Question, Marks, RealOpt, Opt2, Opt3, Opt4);
+                this.Close();
+            }
 
 
             

@@ -33,7 +33,7 @@ namespace NEA_December_2022
             form.Show();
             this.Hide();
             form.BackColor = this.BackColor;
-            NEAFonts f = new NEAFonts();
+        
 
         }
 
@@ -43,6 +43,15 @@ namespace NEA_December_2022
             form.Show();
             this.Hide();
             form.BackColor = this.BackColor;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var form = new CreateMultiC(id);
+            form.Show();
+            this.Hide();
+            form.BackColor = this.BackColor;
+        
         }
     }
 }

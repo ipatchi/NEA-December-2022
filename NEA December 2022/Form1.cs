@@ -6,6 +6,22 @@ namespace NEA_December_2022
         public Form1()
         {
             InitializeComponent();
+
+            
+            try
+            {
+                string filename = "PrevColour.txt";
+                string colour = File.ReadAllText(filename);
+
+                NEAString s = new NEAString();
+                Color c = s.TranslateColour(colour);
+                this.BackColor = c;
+            }
+            catch
+            {
+                MessageBox.Show("Failed to load BG colour");
+            }
+            
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
@@ -72,7 +88,14 @@ namespace NEA_December_2022
                         colours.Add(reader3.GetString(0));
                     }
 
+                    string filename = "PrevColour.txt";
+                    File.WriteAllText(filename, colours[0]);
+
+
+
+
                     NEAString Converter = new NEAString();
+                    
                     this.BackColor = Converter.TranslateColour(colours[0]);
 
 
