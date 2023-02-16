@@ -32,7 +32,7 @@ namespace NEA_December_2022
 
             con.Open();
 
-            string sql = "SELECT Question,ID,CreatorID FROM flashcards;";
+            string sql = "SELECT Question,ID,CreatorID FROM Questions;";
             using var cmd = new SqliteCommand(sql, con);
             using SqliteDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -125,38 +125,49 @@ namespace NEA_December_2022
             SqliteConnection con = new SqliteConnection("Data Source = " + where + "/Revision.db;");
 
             con.Open();
-            
 
-            string sql = "SELECT Question,Answer,QuestionBG,QuestionFG,AnswerBG,AnswerFG,QFont,AFont,Marks FROM flashcards WHERE ID = '"+ ID+" ';";
-            using var cmd = new SqliteCommand(sql, con);
-            using SqliteDataReader reader = cmd.ExecuteReader();
-            string Question = "";
-            string Answer = "";
-            string BGColour = "";
-            string FGColour = "";
-            string ABGColour = "";
-            string AFGColour = "";
-            string QFont = "";
-            string AFont = "";
-            string Marks = "";
+            string sql0 = "SELECT type FROM Questions WHERE ID = '" + ID + " ';";
+            using var cmd0 = new SqliteCommand(sql0, con);
+            using SqliteDataReader reader0 = cmd0.ExecuteReader();
+            reader0.Read();
+            int type = Convert.ToInt16(reader0.GetValue(0));
 
-            while (reader.Read())
+            if (type == 1)
             {
-                Question = reader.GetString(0);
-                Answer = reader.GetString(1);
-                BGColour = reader.GetString(2);
-                FGColour = reader.GetString(3);
-                ABGColour = reader.GetString(4);
-                AFGColour = reader.GetString(5);
-                QFont = reader.GetString(6);
-                AFont = reader.GetString(7);
-                Marks = reader.GetString(8);
+                string sql = "SELECT Question,Answer,QuestionBG,QuestionFG,AnswerBG,AnswerFG,QFont,AFont,Marks FROM flashcards WHERE ID = '" + ID + " ';";
+                using var cmd = new SqliteCommand(sql, con);
+                using SqliteDataReader reader = cmd.ExecuteReader();
+                string Question = "";
+                string Answer = "";
+                string BGColour = "";
+                string FGColour = "";
+                string ABGColour = "";
+                string AFGColour = "";
+                string QFont = "";
+                string AFont = "";
+                string Marks = "";
+
+                while (reader.Read())
+                {
+                    Question = reader.GetString(0);
+                    Answer = reader.GetString(1);
+                    BGColour = reader.GetString(2);
+                    FGColour = reader.GetString(3);
+                    ABGColour = reader.GetString(4);
+                    AFGColour = reader.GetString(5);
+                    QFont = reader.GetString(6);
+                    AFont = reader.GetString(7);
+                    Marks = reader.GetString(8);
+                }
+                var form = new PlayQA(ID);
+                form.Show();
+                form.BackColor = this.BackColor;
+                form.viewQA(Question, Answer, BGColour, FGColour, ABGColour, AFGColour, QFont, AFont, Marks);
+                this.Close();
             }
-            var form = new PlayQA(ID);
-            form.Show();
-            form.BackColor = this.BackColor;
-            form.viewQA(Question, Answer, BGColour, FGColour,ABGColour,AFGColour,QFont,AFont,Marks);
-            this.Close();
+
+
+            
            
 
         }

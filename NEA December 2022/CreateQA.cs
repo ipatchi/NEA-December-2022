@@ -107,14 +107,25 @@ namespace NEA_December_2022
 
                 int CID = id;
                 int Marks = Convert.ToInt16(MarksInp.Value);
-
+                int type = 1;
 
 
                 con.Open();
+          
+                var command1 = con.CreateCommand();
+                string sql1 = "INSERT into Questions (CreatorID, Type, Question)VALUES ('" + CID + "','" + type + "','" + Question + "');";
+                command1.CommandText = sql1;
+                command1.ExecuteNonQuery();
+
+
                 var command = con.CreateCommand();
-                string sql2 = "INSERT into Flashcards (Question, Answer, Modified, CreatorID, Marks, QuestionBG, QuestionFG, AnswerBG, AnswerFG, AFont, QFont) " +
-                    "VALUES ('" + Question + "','" + Answer + "','" + Modified + "','" + CID + "','" + Marks + "','" + QuestionBGColour + "','"
-                    + QuestionFGColour + "','" + AnswerBGColour + "','" + AnswerFGColour + "','" + QuestionFont + "','" + AnswerFont + "');";
+                
+
+                string sql2 = "UPDATE Flashcards SET Answer = '" + Answer + "', Modified = '" + Modified + "', Marks = '" + Marks + "', " +
+                    "QuestionBG = '" + QuestionBGColour + "', QuestionFG = '" + QuestionFGColour + "', AnswerBG = '" + AnswerBGColour + "'," +
+                    " AnswerFG = '" + AnswerFGColour + "', AFont = '" + AnswerFont + "', QFont = '" + QuestionFont + "' WHERE Question = '"+Question+"';";
+                    
+
                 command.CommandText = sql2;
                 command.ExecuteNonQuery();
 
