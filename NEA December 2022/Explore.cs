@@ -48,13 +48,42 @@ namespace NEA_December_2022
             
         }
 
-        public void ShowQuestions(List<string> Questions1, List<int> IDs1, List<int> CreatorIDs1)
+        public void SearchID(String[] Questions1, int[] IDs1, int[] CreatorIDs1)
         {
+            NEASortSearch s = new NEASortSearch();
             string[] Questions = Questions1.ToArray();
             int[] IDs = IDs1.ToArray();
             int[] CreatorIDs = CreatorIDs1.ToArray();
 
-            
+            int searchfor = Convert.ToInt32(numericUpDown1.Value);
+            s.SetArray(IDs);
+            s.RunMerge();
+            int value = s.SearchArray(searchfor, s.GetArray());
+            if (value == -1)
+            {
+                MessageBox.Show("Question ID Does Not Exist");
+            }
+            else
+            {
+                MessageBox.Show("Question ID Exists At Index: " + value);
+            }
+
+        }
+
+        public string[] Questions;
+        public int[] IDs;
+        public int[] CIDs;
+
+
+
+
+        public void ShowQuestions(List<string> Questions1, List<int> IDs1, List<int> CreatorIDs1)
+        {
+  
+            Questions = Questions1.ToArray();
+            IDs = IDs1.ToArray();
+            CIDs = CreatorIDs1.ToArray();
+
             DataTable table = new DataTable();
             DataColumn dtcolumn;
             DataRow mydatarow;
@@ -77,7 +106,7 @@ namespace NEA_December_2022
                 mydatarow = table.NewRow();
                 mydatarow["Question"] = Questions[i];
                 mydatarow["ID"] = IDs[i];
-                mydatarow["Creator ID"] = CreatorIDs[i];
+                mydatarow["Creator ID"] = CIDs[i];
                 table.Rows.Add(mydatarow);
             }
             dataGridView1.BackgroundColor = this.BackColor;
@@ -143,6 +172,11 @@ namespace NEA_December_2022
             form.Show();
             form.BackColor = this.BackColor;
             this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SearchID(Questions, IDs, CIDs);
         }
     }
     
