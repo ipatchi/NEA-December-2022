@@ -67,6 +67,10 @@ namespace NEA_December_2022
             else
             {
                 MessageBox.Show("Question ID Exists At Index: " + value);
+                OpenQ(IDs[value]);
+
+
+
             }
 
         }
@@ -224,6 +228,8 @@ namespace NEA_December_2022
         private void button2_Click(object sender, EventArgs e)
         {
             SearchID(Questions, IDs, CIDs);
+
+
         }
 
         private void button3_Click(object sender, EventArgs e)

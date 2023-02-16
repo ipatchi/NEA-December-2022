@@ -35,6 +35,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -102,6 +103,7 @@
             // 
             this.flowLayoutPanel1.Controls.Add(this.button2);
             this.flowLayoutPanel1.Controls.Add(this.numericUpDown1);
+            this.flowLayoutPanel1.Controls.Add(this.splitter1);
             this.flowLayoutPanel1.Controls.Add(this.textBox1);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(78, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -112,7 +114,7 @@
             // 
             this.button2.Location = new System.Drawing.Point(3, 3);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(69, 38);
+            this.button2.Size = new System.Drawing.Size(93, 38);
             this.button2.TabIndex = 2;
             this.button2.Text = "Search For ID:";
             this.button2.UseVisualStyleBackColor = true;
@@ -121,15 +123,23 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.numericUpDown1.Location = new System.Drawing.Point(78, 3);
+            this.numericUpDown1.Location = new System.Drawing.Point(102, 3);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(86, 29);
             this.numericUpDown1.TabIndex = 3;
             // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(194, 3);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(30, 38);
+            this.splitter1.TabIndex = 5;
+            this.splitter1.TabStop = false;
+            // 
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox1.Location = new System.Drawing.Point(170, 3);
+            this.textBox1.Location = new System.Drawing.Point(230, 3);
             this.textBox1.Name = "textBox1";
             this.textBox1.PlaceholderText = "Search For A Question...";
             this.textBox1.Size = new System.Drawing.Size(346, 31);
@@ -163,5 +173,6 @@
         private FlowLayoutPanel flowLayoutPanel1;
         private NumericUpDown numericUpDown1;
         private TextBox textBox1;
+        private Splitter splitter1;
     }
 }
