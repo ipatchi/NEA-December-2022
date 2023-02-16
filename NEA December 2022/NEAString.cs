@@ -1,6 +1,7 @@
 ﻿using SQLitePCL;
 using System;
 using System.Collections.Generic;
+using System.DirectoryServices;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -268,6 +269,27 @@ namespace NEA_December_2022
             }
             return newar;
         }
+
+
+        public (int,string) multi_run_linear_string(string term, string[] ar)
+        {
+            int entreies = 0;
+            string word = "";
+            for (int i = 0; i < ar.Length; i++)
+            {
+                for (int j = 0; j < ar[i].Length; j++)
+                {
+                    if (ar[i].Substring(0,j) == term)
+                    {
+                        entreies++;
+                        word = ar[i];
+                    }
+                    
+                }
+            }
+            return (entreies,word);
+        }
+
 
 
 

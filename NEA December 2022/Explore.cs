@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,12 +21,12 @@ namespace NEA_December_2022
         {
             InitializeComponent();
             id = ID;
-            
+
 
             List<string> Questions = new List<string>();
             List<int> IDs = new List<int>();
             List<int> CIDs = new List<int>();
-            
+
             string where = Directory.GetCurrentDirectory();
             where = where.Substring(0, where.Length - 24);
             SqliteConnection con = new SqliteConnection("Data Source = " + where + "/Revision.db;");
@@ -44,8 +45,8 @@ namespace NEA_December_2022
 
 
             ShowQuestions(Questions, IDs, CIDs);
-            
-            
+
+
         }
 
         public void SearchID(String[] Questions1, int[] IDs1, int[] CreatorIDs1)
@@ -79,7 +80,7 @@ namespace NEA_December_2022
 
         public void ShowQuestions(List<string> Questions1, List<int> IDs1, List<int> CreatorIDs1)
         {
-  
+
             Questions = Questions1.ToArray();
             IDs = IDs1.ToArray();
             CIDs = CreatorIDs1.ToArray();
@@ -101,7 +102,7 @@ namespace NEA_December_2022
             table.Columns.Add(dtcolumn);
 
 
-           for (int i = 0; i < Questions.Length; i++)
+            for (int i = 0; i < Questions.Length; i++)
             {
                 mydatarow = table.NewRow();
                 mydatarow["Question"] = Questions[i];
@@ -113,13 +114,9 @@ namespace NEA_December_2022
             dataGridView1.DataSource = table;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        public void OpenQ(int QID)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex != 0) return;
-
-           
-            int ID = Convert.ToInt16(dataGridView1[e.ColumnIndex + 2, e.RowIndex].FormattedValue);
-
+            int ID = QID;
             string where = Directory.GetCurrentDirectory();
             where = where.Substring(0, where.Length - 24);
             SqliteConnection con = new SqliteConnection("Data Source = " + where + "/Revision.db;");
@@ -192,12 +189,24 @@ namespace NEA_December_2022
                 form.LoadQ(Question, Marks, RealOpt, Opt2, Opt3, Opt4);
                 this.Close();
             }
-
-
-            
-           
-
         }
+
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex != 0) return;
+
+
+            int ID = Convert.ToInt16(dataGridView1[e.ColumnIndex + 2, e.RowIndex].FormattedValue);
+            OpenQ(ID);
+            
+        }
+
+
+
+
+
+        
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -216,6 +225,46 @@ namespace NEA_December_2022
         {
             SearchID(Questions, IDs, CIDs);
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            
+            string where = Directory.GetCurrentDirectory();
+            where = where.Substring(0, where.Length - 24);
+            SqliteConnection con = new SqliteConnection("Data Source = " + where + "/Revision.db;");
+
+            con.Open();
+
+
+
+            NEASortSearch s = new NEASortSearch();
+            string text = textBox1.Text;
+            int gn = 0;
+            var h = s.multi_run_linear_string(text, Questions);
+            gn = h.Item1;
+
+            if (gn == 1)
+            {
+                string word = h.Item2;
+                DialogResult dialogResult = MessageBox.Show("Did you mean: " + word + "?", "Search For Question", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    string sql0 = "SELECT ID FROM Questions WHERE Question = '" + word + "';";
+                    using var cmd0 = new SqliteCommand(sql0, con);
+                    using SqliteDataReader reader0 = cmd0.ExecuteReader();
+                    reader0.Read();
+                    int ID = Convert.ToInt16(reader0.GetValue(0));
+                    OpenQ(ID);
+                }
+
+
+            }
+        }
+
     }
-    
 }
