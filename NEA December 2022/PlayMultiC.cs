@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.Sqlite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,12 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace NEA_December_2022
 {
     public partial class PlayMultiC : Form
     {
         public int id;
+        public int Qid;
         public PlayMultiC(int ID)
         {
             id = ID;
@@ -28,7 +31,30 @@ namespace NEA_December_2022
             InputQ.Text = Question;
             List<int> used = new List<int>();
             string[] strings = {RealOp, op2, op3, op4};
-            
+
+            //------------------------------------   Find Question ID   ----------------------------------------------
+            List<string> IDs = new List<string>();
+
+            string where = Directory.GetCurrentDirectory();
+            where = where.Substring(0, where.Length - 24);
+            SqliteConnection con = new SqliteConnection("Data Source = " + where + "/Revision.db;");
+            //SqliteConnection con = new SqliteConnection("Data Source = Revision.db;");
+            con.Open();
+            string sql = "SELECT ID FROM Questions WHERE Question = '" + Question + "';";
+            using var cmd = new SqliteCommand(sql, con);
+            using SqliteDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                IDs.Add(reader.GetString(0));
+            }
+            if (IDs.Count > 0)
+            {
+                Qid = Convert.ToInt32(IDs[0]);
+            }
+
+
+            //-------------------------------------------------------------------------------------------------------
+
             Random rnd = new Random();
             bool not_done = true;
             
@@ -67,6 +93,46 @@ namespace NEA_December_2022
                 f.Show();
                 this.Hide();
                 f.BackColor = this.BackColor;
+
+
+                List<string> IDs = new List<string>();
+
+                string where = Directory.GetCurrentDirectory();
+                where = where.Substring(0, where.Length - 24);
+                SqliteConnection con = new SqliteConnection("Data Source = " + where + "/Revision.db;");
+                //SqliteConnection con = new SqliteConnection("Data Source = Revision.db;");
+                con.Open();
+                string sql = "SELECT QuestionID FROM Completed WHERE QuestionID = '" + Qid + "' AND UserID = '"+ id +"';";
+                using var cmd = new SqliteCommand(sql, con);
+                using SqliteDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    IDs.Add(reader.GetString(0));
+                }
+                if (IDs.Count > 0)
+                {
+                    MessageBox.Show("You have already done this question");
+                }
+                else
+                {
+                    
+                    con.Open();
+                    var command = con.CreateCommand();
+                    string sql2 = "INSERT into Completed (UserID, QuestionID, Score) VALUES ('" + id + "','" + Qid + "','" + 1 + "');";
+                    command.CommandText = sql2;
+                    MessageBox.Show(sql2);
+                    command.ExecuteNonQuery();
+
+                    con.Close();
+                    MessageBox.Show("Score Registered Successfully");
+
+                    var Form = new Form1();
+                    this.Hide();
+                    Form.Show();
+                    Form.BackColor = this.BackColor;
+                }
+
+
             }
             else
             {

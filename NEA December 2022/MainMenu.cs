@@ -20,7 +20,6 @@ namespace NEA_December_2022
         {
             InitializeComponent();
             ID = ID2;
-               
         }
 
         public int ID;

@@ -290,7 +290,17 @@ namespace NEA_December_2022
             return (entreies,word);
         }
 
-
+        public int average(int[] array)
+        {
+            int avg;
+            int s = 0;
+            foreach(int t in array)
+            {
+                s += t;
+            }
+            avg = s / array.Length;
+            return avg;
+        }
 
 
 
