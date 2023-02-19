@@ -49,5 +49,13 @@ namespace NEA_December_2022
             this.Hide();
             form.BackColor = this.BackColor;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var form = new BigQuiz(ID);
+            form.Show();
+            this.Hide();
+            form.BackColor = this.BackColor;
+        }
     }
 }
