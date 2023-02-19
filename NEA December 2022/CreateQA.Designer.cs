@@ -305,9 +305,19 @@
             // MarksInp
             // 
             this.MarksInp.Location = new System.Drawing.Point(267, 249);
+            this.MarksInp.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.MarksInp.Name = "MarksInp";
             this.MarksInp.Size = new System.Drawing.Size(70, 23);
             this.MarksInp.TabIndex = 4;
+            this.MarksInp.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // CreateQA
             // 

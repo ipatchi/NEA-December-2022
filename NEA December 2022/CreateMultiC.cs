@@ -40,7 +40,7 @@ namespace NEA_December_2022
                 string opt4 = Opt4.Text;
 
                 int CID = id;
-                int Marks = Convert.ToInt16(MarksInp.Value);
+                int Marks = 1;
                 int type = 2;
 
 

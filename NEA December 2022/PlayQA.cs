@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Microsoft.Data.Sqlite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,16 +14,19 @@ namespace NEA_December_2022
 {
     public partial class PlayQA : Form
     {
-        public PlayQA(int ID)
+        public PlayQA(int ID, int QID)
         {
             InitializeComponent();
             RealAnswerBox.Visible = false;
             button2.Visible = false;
             id = ID;
+            Qid = QID;
         }
 
         public string answer = "";
         public int id;
+        public int Qid;
+        public int marks = 1;
 
         public void viewQA(string Question, string Answer, String QBG, String QFG,string ABGColour, string AFGColour, 
             string QFont, string AFont, string Marks)
@@ -43,6 +48,7 @@ namespace NEA_December_2022
             RealAnswerBox.Font = s.GetFontAsFont();
 
             answer = Answer;
+            marks = Convert.ToInt32(Marks);
         }
 
 
@@ -51,6 +57,40 @@ namespace NEA_December_2022
             if (InputA.Text.ToUpper().Trim() == answer.ToUpper().Trim())
             {
                 MessageBox.Show("Congratulations!");
+
+                //----------------------------------------------- Insert that it was correct   -------------------------------------
+                List<string> IDs = new List<string>();
+
+                string where = Directory.GetCurrentDirectory();
+                where = where.Substring(0, where.Length - 24);
+                SqliteConnection con = new SqliteConnection("Data Source = " + where + "/Revision.db;");
+                //SqliteConnection con = new SqliteConnection("Data Source = Revision.db;");
+                con.Open();
+                string sql = "SELECT QuestionID FROM Completed WHERE QuestionID = '" + Qid + "' AND UserID = '" + id + "';";
+                using var cmd = new SqliteCommand(sql, con);
+                using SqliteDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    IDs.Add(reader.GetString(0));
+                }
+                if (IDs.Count > 0)
+                {
+                    //Has already done question
+                }
+
+                con.Open();
+                var command = con.CreateCommand();
+                string sql2 = "INSERT into Completed (UserID, QuestionID, Score) VALUES ('" + id + "','" + Qid + "','" + marks + "');";
+                command.CommandText = sql2;
+
+                command.ExecuteNonQuery();
+
+                con.Close();
+                MessageBox.Show("Score Registered Successfully");
+                //-------------------------------------------------------------------------------------------------------------------
+
+
+
                 var form = new Explore(id);
                 form.BackColor = this.BackColor;
                 form.Show();
@@ -59,6 +99,40 @@ namespace NEA_December_2022
             else
             {
                 MessageBox.Show("Incorrect");
+
+                //----------------------------------------------- Insert that wasnt correct   -------------------------------------
+                List<string> IDs = new List<string>();
+
+                string where = Directory.GetCurrentDirectory();
+                where = where.Substring(0, where.Length - 24);
+                SqliteConnection con = new SqliteConnection("Data Source = " + where + "/Revision.db;");
+                //SqliteConnection con = new SqliteConnection("Data Source = Revision.db;");
+                con.Open();
+                string sql = "SELECT QuestionID FROM Completed WHERE QuestionID = '" + Qid + "' AND UserID = '" + id + "';";
+                using var cmd = new SqliteCommand(sql, con);
+                using SqliteDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    IDs.Add(reader.GetString(0));
+                }
+                if (IDs.Count > 0)
+                {
+                    //Has already done question
+                }
+
+
+                con.Open();
+                var command = con.CreateCommand();
+                string sql2 = "INSERT into Completed (UserID, QuestionID, Score) VALUES ('" + id + "','" + Qid + "','" + 0 + "');";
+                command.CommandText = sql2;
+
+                command.ExecuteNonQuery();
+
+                con.Close();
+                MessageBox.Show("Score Registered Successfully");
+                //-------------------------------------------------------------------------------------------------------------
+
+
                 RealAnswerBox.Visible = true;
                 button2.Visible = true;
                 button1.Visible = false;

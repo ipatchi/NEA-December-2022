@@ -21,7 +21,7 @@ namespace NEA_December_2022
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var form = new PlayMultiC(id);
+            var form = new PlayMultiC(id,69);
 
             this.IsMdiContainer = true;
             

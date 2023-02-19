@@ -17,9 +17,11 @@ namespace NEA_December_2022
     {
         public int id;
         public int Qid;
-        public PlayMultiC(int ID)
+        public PlayMultiC(int ID, int QID)
         {
             id = ID;
+            Qid = QID;
+            MessageBox.Show("User id is" + id);
             InitializeComponent();
         }
 
@@ -94,7 +96,7 @@ namespace NEA_December_2022
                 this.Hide();
                 f.BackColor = this.BackColor;
 
-
+                //----------------------------------------------- Insert that was correct   -------------------------------------
                 List<string> IDs = new List<string>();
 
                 string where = Directory.GetCurrentDirectory();
@@ -111,36 +113,72 @@ namespace NEA_December_2022
                 }
                 if (IDs.Count > 0)
                 {
-                    MessageBox.Show("You have already done this question");
+                    //Has already done question
                 }
-                else
-                {
                     
-                    con.Open();
-                    var command = con.CreateCommand();
-                    string sql2 = "INSERT into Completed (UserID, QuestionID, Score) VALUES ('" + id + "','" + Qid + "','" + 1 + "');";
-                    command.CommandText = sql2;
-                    MessageBox.Show(sql2);
-                    command.ExecuteNonQuery();
+                con.Open();
+                var command = con.CreateCommand();
+                string sql2 = "INSERT into Completed (UserID, QuestionID, Score) VALUES ('" + id + "','" + Qid + "','" + 1 + "');";
+                command.CommandText = sql2;
+              
+                command.ExecuteNonQuery();
 
-                    con.Close();
-                    MessageBox.Show("Score Registered Successfully");
+                con.Close();
+                MessageBox.Show("Score Registered Successfully");
+                //-------------------------------------------------------------------------------------------------------------------
 
-                    var Form = new Form1();
-                    this.Hide();
-                    Form.Show();
-                    Form.BackColor = this.BackColor;
-                }
-
-
+                var Form = new Form1();
+                this.Hide();
+                Form.Show();
+                Form.BackColor = this.BackColor;
+           
             }
             else
             {
                 MessageBox.Show("The correct answer was option" + RealQ, "Incorrect");
+
+                //----------------------------------------------- Insert that wasnt correct   -------------------------------------
+                List<string> IDs = new List<string>();
+
+                string where = Directory.GetCurrentDirectory();
+                where = where.Substring(0, where.Length - 24);
+                SqliteConnection con = new SqliteConnection("Data Source = " + where + "/Revision.db;");
+                //SqliteConnection con = new SqliteConnection("Data Source = Revision.db;");
+                con.Open();
+                string sql = "SELECT QuestionID FROM Completed WHERE QuestionID = '" + Qid + "' AND UserID = '" + id + "';";
+                using var cmd = new SqliteCommand(sql, con);
+                using SqliteDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    IDs.Add(reader.GetString(0));
+                }
+                if (IDs.Count > 0)
+                {
+                    //Has already done question
+                }
+
+
+                con.Open();
+                var command = con.CreateCommand();
+                string sql2 = "INSERT into Completed (UserID, QuestionID, Score) VALUES ('" + id + "','" + Qid + "','" + 0 + "');";
+                command.CommandText = sql2;
+          
+                command.ExecuteNonQuery();
+
+                con.Close();
+                MessageBox.Show("Score Registered Successfully");
+
+                var Form = new Form1();
+                this.Hide();
+                Form.Show();
+                Form.BackColor = this.BackColor;
+                //-------------------------------------------------------------------------------------------------------------
+
                 var f = new Explore(id);
                 f.Show();
                 this.Hide();
                 f.BackColor = this.BackColor;
+
             }
         }
 

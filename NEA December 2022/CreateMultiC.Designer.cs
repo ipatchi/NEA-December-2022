@@ -39,8 +39,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.MarksInp = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.MarksInp)).BeginInit();
             this.SuspendLayout();
             // 
             // InputQ
@@ -143,19 +141,11 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // MarksInp
-            // 
-            this.MarksInp.Location = new System.Drawing.Point(666, 135);
-            this.MarksInp.Name = "MarksInp";
-            this.MarksInp.Size = new System.Drawing.Size(120, 23);
-            this.MarksInp.TabIndex = 14;
-            // 
             // CreateMultiC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 504);
-            this.Controls.Add(this.MarksInp);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -169,7 +159,6 @@
             this.Controls.Add(this.InputQ);
             this.Name = "CreateMultiC";
             this.Text = "CreateMultiC";
-            ((System.ComponentModel.ISupportInitialize)(this.MarksInp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,6 +177,5 @@
         private Label label3;
         private Label label4;
         private Button button2;
-        private NumericUpDown MarksInp;
     }
 }

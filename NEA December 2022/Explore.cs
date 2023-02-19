@@ -160,7 +160,7 @@ namespace NEA_December_2022
                     AFont = reader.GetString(7);
                     Marks = reader.GetString(8);
                 }
-                var form = new PlayQA(ID);
+                var form = new PlayQA(id,ID);
                 form.Show();
                 form.BackColor = this.BackColor;
                 form.viewQA(Question, Answer, BGColour, FGColour, ABGColour, AFGColour, QFont, AFont, Marks);
@@ -187,7 +187,7 @@ namespace NEA_December_2022
                     Opt4 = reader.GetString(5);
                     Marks = Convert.ToInt32(reader.GetValue(1));
                 }
-                var form = new PlayMultiC(ID);
+                var form = new PlayMultiC(id,ID);
                 form.Show();
                 form.BackColor = this.BackColor;
                 form.LoadQ(Question, Marks, RealOpt, Opt2, Opt3, Opt4);
