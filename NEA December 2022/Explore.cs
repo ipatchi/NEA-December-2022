@@ -16,16 +16,17 @@ namespace NEA_December_2022
 {
     public partial class Explore : Form
     {
-        public int id;
+        public int userid;
         public Explore(int ID)
         {
             InitializeComponent();
-            id = ID;
+            userid = ID;
 
 
             List<string> Questions = new List<string>();
             List<int> IDs = new List<int>();
             List<int> CIDs = new List<int>();
+            List<int> Scores = new List<int>();
 
             string where = Directory.GetCurrentDirectory();
             where = where.Substring(0, where.Length - 24);
@@ -36,6 +37,7 @@ namespace NEA_December_2022
             string sql = "SELECT Question,ID,CreatorID FROM Questions;";
             using var cmd = new SqliteCommand(sql, con);
             using SqliteDataReader reader = cmd.ExecuteReader();
+
             while (reader.Read())
             {
                 Questions.Add(reader.GetString(0));
@@ -43,8 +45,33 @@ namespace NEA_December_2022
                 CIDs.Add(reader.GetInt32(2));
             }
 
+            
+            foreach (int questionid in IDs)
+            {
+                List<int> EveryScore= new List<int>();
 
-            ShowQuestions(Questions, IDs, CIDs);
+                string sql2 = "SELECT Score FROM Completed WHERE QuestionID = '" + questionid + "';";
+                using var cmd2 = new SqliteCommand(sql2, con);
+                using SqliteDataReader reader2 = cmd2.ExecuteReader();
+                while (reader2.Read())
+                {
+                    EveryScore.Add(Convert.ToInt32(reader2.GetString(0)));
+                }
+                if (EveryScore.Count > 0)
+                {
+                    NEASortSearch s = new NEASortSearch();
+                    Scores.Add(s.average(EveryScore.ToArray()));
+                }
+                else
+                {
+                    Scores.Add(0);
+                }
+            }
+            
+
+
+
+            ShowQuestions(Questions, IDs, CIDs, Scores);
 
 
         }
@@ -78,16 +105,18 @@ namespace NEA_December_2022
         public string[] Questions;
         public int[] IDs;
         public int[] CIDs;
+        public int[] Scores;
 
 
 
 
-        public void ShowQuestions(List<string> Questions1, List<int> IDs1, List<int> CreatorIDs1)
+        public void ShowQuestions(List<string> Questions1, List<int> IDs1, List<int> CreatorIDs1, List<int> Scores1)
         {
 
             Questions = Questions1.ToArray();
             IDs = IDs1.ToArray();
             CIDs = CreatorIDs1.ToArray();
+            Scores = Scores1.ToArray();
 
             DataTable table = new DataTable();
             DataColumn dtcolumn;
@@ -105,6 +134,10 @@ namespace NEA_December_2022
             dtcolumn.ColumnName = "Creator ID";
             table.Columns.Add(dtcolumn);
 
+            dtcolumn = new DataColumn();
+            dtcolumn.ColumnName = "Average Score";
+            table.Columns.Add(dtcolumn);
+
 
             for (int i = 0; i < Questions.Length; i++)
             {
@@ -112,6 +145,7 @@ namespace NEA_December_2022
                 mydatarow["Question"] = Questions[i];
                 mydatarow["ID"] = IDs[i];
                 mydatarow["Creator ID"] = CIDs[i];
+                mydatarow["Average Score"] = Scores[i];
                 table.Rows.Add(mydatarow);
             }
             dataGridView1.BackgroundColor = this.BackColor;
@@ -160,7 +194,7 @@ namespace NEA_December_2022
                     AFont = reader.GetString(7);
                     Marks = reader.GetString(8);
                 }
-                var form = new PlayQA(id,ID);
+                var form = new PlayQA(userid,ID);
                 form.Show();
                 form.BackColor = this.BackColor;
                 form.viewQA(Question, Answer, BGColour, FGColour, ABGColour, AFGColour, QFont, AFont, Marks);
@@ -187,7 +221,7 @@ namespace NEA_December_2022
                     Opt4 = reader.GetString(5);
                     Marks = Convert.ToInt32(reader.GetValue(1));
                 }
-                var form = new PlayMultiC(id,ID);
+                var form = new PlayMultiC(userid,ID);
                 form.Show();
                 form.BackColor = this.BackColor;
                 form.LoadQ(Question, Marks, RealOpt, Opt2, Opt3, Opt4);
@@ -219,7 +253,7 @@ namespace NEA_December_2022
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var form = new MainMenu(id);
+            var form = new MainMenu(userid);
             form.Show();
             form.BackColor = this.BackColor;
             this.Close();

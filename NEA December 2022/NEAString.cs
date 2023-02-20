@@ -292,13 +292,17 @@ namespace NEA_December_2022
 
         public int average(int[] array)
         {
+            double rounder;
             int avg;
             int s = 0;
             foreach(int t in array)
             {
                 s += t;
             }
-            avg = s / array.Length;
+            
+            rounder = Math.Ceiling((double)s / array.Length);
+            avg = Convert.ToInt32(rounder);
+            
             return avg;
         }
 

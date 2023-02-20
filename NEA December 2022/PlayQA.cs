@@ -86,7 +86,7 @@ namespace NEA_December_2022
                 command.ExecuteNonQuery();
 
                 con.Close();
-                MessageBox.Show("Score Registered Successfully");
+    
                 //-------------------------------------------------------------------------------------------------------------------
 
 
@@ -129,7 +129,6 @@ namespace NEA_December_2022
                 command.ExecuteNonQuery();
 
                 con.Close();
-                MessageBox.Show("Score Registered Successfully");
                 //-------------------------------------------------------------------------------------------------------------
 
 

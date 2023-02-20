@@ -21,7 +21,7 @@ namespace NEA_December_2022
         {
             id = ID;
             Qid = QID;
-            MessageBox.Show("User id is" + id);
+           
             InitializeComponent();
         }
 
@@ -124,13 +124,10 @@ namespace NEA_December_2022
                 command.ExecuteNonQuery();
 
                 con.Close();
-                MessageBox.Show("Score Registered Successfully");
+ 
                 //-------------------------------------------------------------------------------------------------------------------
 
-                var Form = new Form1();
-                this.Hide();
-                Form.Show();
-                Form.BackColor = this.BackColor;
+             
            
             }
             else
@@ -166,12 +163,7 @@ namespace NEA_December_2022
                 command.ExecuteNonQuery();
 
                 con.Close();
-                MessageBox.Show("Score Registered Successfully");
-
-                var Form = new Form1();
-                this.Hide();
-                Form.Show();
-                Form.BackColor = this.BackColor;
+         
                 //-------------------------------------------------------------------------------------------------------------
 
                 var f = new Explore(id);
