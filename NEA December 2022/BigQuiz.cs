@@ -140,7 +140,7 @@ namespace NEA_December_2022
 
         private void button1_Click(object sender, EventArgs e)
         {
-          
+            button1.Hide();
             playlist[0] = 28;
             playlist[1] = 29;
             playlist[2] = 25;
@@ -158,7 +158,12 @@ namespace NEA_December_2022
 
         private void BigQuiz_TextChanged(object sender, EventArgs e)
         {
-            registerScore(Convert.ToInt32(this.Text[0]) - 48);
+            if (!(this.Text == "NEA Big Quiz"))
+            {
+                registerScore(Convert.ToInt32(this.Text[0]) - 48);
+                this.Text = "NEA Big Quiz";
+            }
+        
         }
     }
 }

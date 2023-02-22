@@ -32,16 +32,20 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.LoadFormPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.LoadFormPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(24, 14);
+            this.button1.BackColor = System.Drawing.Color.Green;
+            this.button1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button1.Location = new System.Drawing.Point(358, 202);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(185, 114);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Next Q";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Text = "Start Quiz";
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // progressBar1
@@ -53,6 +57,7 @@
             // 
             // LoadFormPanel
             // 
+            this.LoadFormPanel.Controls.Add(this.button1);
             this.LoadFormPanel.Location = new System.Drawing.Point(75, 44);
             this.LoadFormPanel.Name = "LoadFormPanel";
             this.LoadFormPanel.Size = new System.Drawing.Size(961, 542);
@@ -76,10 +81,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.LoadFormPanel);
             this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.button1);
             this.Name = "BigQuiz";
             this.Text = "BigQuiz";
             this.TextChanged += new System.EventHandler(this.BigQuiz_TextChanged);
+            this.LoadFormPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
