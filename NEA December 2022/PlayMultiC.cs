@@ -17,6 +17,7 @@ namespace NEA_December_2022
     {
         public int id;
         public int Qid;
+        public Form wherecamefrom;
         public PlayMultiC(int ID, int QID)
         {
             id = ID;
@@ -28,8 +29,9 @@ namespace NEA_December_2022
         public int RealQ = 1;
 
 
-        public void LoadQ(string Question, int Marks, string RealOp, string op2, string op3, string op4)
+        public void LoadQ(string Question, int Marks, string RealOp, string op2, string op3, string op4, Form camefrom)
         {
+            wherecamefrom= camefrom;
             InputQ.Text = Question;
             List<int> used = new List<int>();
             string[] strings = {RealOp, op2, op3, op4};
@@ -91,10 +93,11 @@ namespace NEA_December_2022
             if (C == RealQ)
             {
                 MessageBox.Show("Correct!");
-                var f = new Explore(id);
-                f.Show();
+                Random random = new Random();
+                wherecamefrom.Show();
+                wherecamefrom.Text = "1" + Qid + random.Next();
                 this.Hide();
-                f.BackColor = this.BackColor;
+         
 
                 //----------------------------------------------- Insert that was correct   -------------------------------------
                 List<string> IDs = new List<string>();
@@ -165,11 +168,14 @@ namespace NEA_December_2022
                 con.Close();
          
                 //-------------------------------------------------------------------------------------------------------------
-
-                var f = new Explore(id);
-                f.Show();
+                Random random= new Random();
+                
+                wherecamefrom.Show();
+                wherecamefrom.Text = "0" + Qid + random.Next();
+                
+                
                 this.Hide();
-                f.BackColor = this.BackColor;
+
 
             }
         }

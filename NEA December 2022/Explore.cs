@@ -197,7 +197,7 @@ namespace NEA_December_2022
                 var form = new PlayQA(userid,ID);
                 form.Show();
                 form.BackColor = this.BackColor;
-                form.viewQA(Question, Answer, BGColour, FGColour, ABGColour, AFGColour, QFont, AFont, Marks);
+                form.viewQA(Question, Answer, BGColour, FGColour, ABGColour, AFGColour, QFont, AFont, Marks, this);
                 this.Close();
             }
             else if (type == 2)
@@ -224,7 +224,7 @@ namespace NEA_December_2022
                 var form = new PlayMultiC(userid,ID);
                 form.Show();
                 form.BackColor = this.BackColor;
-                form.LoadQ(Question, Marks, RealOpt, Opt2, Opt3, Opt4);
+                form.LoadQ(Question, Marks, RealOpt, Opt2, Opt3, Opt4, this);
                 this.Close();
             }
         }

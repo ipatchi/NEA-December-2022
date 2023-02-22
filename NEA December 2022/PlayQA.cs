@@ -28,9 +28,12 @@ namespace NEA_December_2022
         public int Qid;
         public int marks = 1;
 
+        public Form wherecamefrom;
+
         public void viewQA(string Question, string Answer, String QBG, String QFG,string ABGColour, string AFGColour, 
-            string QFont, string AFont, string Marks)
+            string QFont, string AFont, string Marks, Form camefrom)
         {
+            wherecamefrom = camefrom;
             NEAFonts s = new NEAFonts();
             OutputQ.Text = Question;
             OutputQ.BackColor = s.TranslateColour(QBG);
@@ -86,14 +89,15 @@ namespace NEA_December_2022
                 command.ExecuteNonQuery();
 
                 con.Close();
-    
+
                 //-------------------------------------------------------------------------------------------------------------------
 
 
 
-                var form = new Explore(id);
-                form.BackColor = this.BackColor;
-                form.Show();
+                Random random = new Random();
+                wherecamefrom.Show();
+                wherecamefrom.Text = Convert.ToString(marks) + Qid + random.Next();
+            
                 this.Close();
             }
             else
@@ -142,9 +146,9 @@ namespace NEA_December_2022
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var form = new Explore(id);
-            form.BackColor = this.BackColor;
-            form.Show();
+            Random random = new Random();
+            wherecamefrom.Show();
+            wherecamefrom.Text = "0" + Qid + random.Next();
             this.Close();
         }
     }

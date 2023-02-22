@@ -305,6 +305,11 @@
             // MarksInp
             // 
             this.MarksInp.Location = new System.Drawing.Point(267, 249);
+            this.MarksInp.Maximum = new decimal(new int[] {
+            9,
+            0,
+            0,
+            0});
             this.MarksInp.Minimum = new decimal(new int[] {
             1,
             0,
