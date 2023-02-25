@@ -98,7 +98,7 @@ namespace NEA_December_2022
                 wherecamefrom.Show();
                 wherecamefrom.Text = Convert.ToString(marks) + Qid + random.Next();
             
-                this.Close();
+                this.Hide();
             }
             else
             {

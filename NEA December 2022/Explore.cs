@@ -207,7 +207,7 @@ namespace NEA_December_2022
                 form.Show();
                 form.BackColor = this.BackColor;
                 form.viewQA(Question, Answer, BGColour, FGColour, ABGColour, AFGColour, QFont, AFont, Marks, this);
-                this.Close();
+                this.Hide();
             }
             else if (type == 2)
             {

@@ -136,7 +136,7 @@ namespace NEA_December_2022
             else
             {
                 MessageBox.Show("Quiz Completed");
-                var f = new MainMenu(userid);
+                var f = new TestResults(userid);
                 f.Show();
                 f.BackColor = this.BackColor;
                 this.Close();

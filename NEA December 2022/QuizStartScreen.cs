@@ -21,10 +21,18 @@ namespace NEA_December_2022
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var form = new BigQuiz(userid, comboBox1.Text);
-            form.Show();
-            this.Hide();
-            form.BackColor = this.BackColor;
+            if (!(comboBox1.Text == ""))
+            {
+                var form = new BigQuiz(userid, comboBox1.Text);
+                form.Show();
+                this.Hide();
+                form.BackColor = this.BackColor;
+            }
+            else
+            {
+                MessageBox.Show("Please Select A Difficulty");
+            }
+            
         }
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
