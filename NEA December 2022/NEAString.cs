@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.DirectoryServices;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -305,6 +306,19 @@ namespace NEA_December_2022
             
             return avg;
         }
+        public double doubleaverage(double[] array)
+        {
+            double avg;
+            int s = 0;
+            foreach (int t in array)
+            {
+                s += t;
+            }
+
+            avg = (double)s / array.Length;
+         
+            return avg;
+        }
 
 
 
@@ -323,6 +337,34 @@ namespace NEA_December_2022
 
         }
 
+
+        public string PrintDubArray(double[] array)
+        {
+            string str = "";
+            if (array.Length > 0)
+            {
+                foreach (int i in array) { str += (i + ", "); }
+                str += "\n";
+            }
+            else { str += "Null"; }
+            //MessageBox.Show(str);
+            return str;
+
+        }
+
+    }
+    internal class NEABigFunctions
+    {
+        public string Hasher(string username, string password)
+        {
+            byte[] byteWord = Encoding.UTF8.GetBytes(password);
+            byte[] byteKey = Encoding.UTF8.GetBytes(username);
+            using (var hmac = new HMACSHA256(byteKey))
+            {
+                byte[] hashedBytes = hmac.ComputeHash(byteWord);
+                return Convert.ToBase64String(hashedBytes);
+            }
+        }
     }
 
 }

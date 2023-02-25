@@ -27,6 +27,7 @@ namespace NEA_December_2022
             List<int> IDs = new List<int>();
             List<int> CIDs = new List<int>();
             List<int> Scores = new List<int>();
+            List<string> Subs = new List<string>();
 
             string where = Directory.GetCurrentDirectory();
             where = where.Substring(0, where.Length - 24);
@@ -34,7 +35,7 @@ namespace NEA_December_2022
 
             con.Open();
 
-            string sql = "SELECT Question,ID,CreatorID FROM Questions;";
+            string sql = "SELECT Question,ID,CreatorID,Subtopic FROM Questions;";
             using var cmd = new SqliteCommand(sql, con);
             using SqliteDataReader reader = cmd.ExecuteReader();
 
@@ -43,6 +44,7 @@ namespace NEA_December_2022
                 Questions.Add(reader.GetString(0));
                 IDs.Add(reader.GetInt32(1));
                 CIDs.Add(reader.GetInt32(2));
+                Subs.Add(reader.GetString(3));
             }
 
             
@@ -71,7 +73,7 @@ namespace NEA_December_2022
 
 
 
-            ShowQuestions(Questions, IDs, CIDs, Scores);
+            ShowQuestions(Questions, IDs, CIDs, Scores, Subs);
 
 
         }
@@ -106,17 +108,19 @@ namespace NEA_December_2022
         public int[] IDs;
         public int[] CIDs;
         public int[] Scores;
+        public string[] Subtopics;
 
 
 
 
-        public void ShowQuestions(List<string> Questions1, List<int> IDs1, List<int> CreatorIDs1, List<int> Scores1)
+        public void ShowQuestions(List<string> Questions1, List<int> IDs1, List<int> CreatorIDs1, List<int> Scores1, List<string> subtopics1)
         {
 
             Questions = Questions1.ToArray();
             IDs = IDs1.ToArray();
             CIDs = CreatorIDs1.ToArray();
             Scores = Scores1.ToArray();
+            Subtopics = subtopics1.ToArray();
 
             DataTable table = new DataTable();
             DataColumn dtcolumn;
@@ -138,6 +142,10 @@ namespace NEA_December_2022
             dtcolumn.ColumnName = "Average Score";
             table.Columns.Add(dtcolumn);
 
+            dtcolumn = new DataColumn();
+            dtcolumn.ColumnName = "Subtopic";
+            table.Columns.Add(dtcolumn);
+
 
             for (int i = 0; i < Questions.Length; i++)
             {
@@ -146,6 +154,7 @@ namespace NEA_December_2022
                 mydatarow["ID"] = IDs[i];
                 mydatarow["Creator ID"] = CIDs[i];
                 mydatarow["Average Score"] = Scores[i];
+                mydatarow["Subtopic"] = Subtopics[i];
                 table.Rows.Add(mydatarow);
             }
             dataGridView1.BackgroundColor = this.BackColor;
@@ -225,7 +234,7 @@ namespace NEA_December_2022
                 form.Show();
                 form.BackColor = this.BackColor;
                 form.LoadQ(Question, Marks, RealOpt, Opt2, Opt3, Opt4, this);
-                this.Close();
+                this.Hide();
             }
         }
 

@@ -56,6 +56,8 @@ namespace NEA_December_2022
                         string username = InputUsername.Text;
                         int age = Convert.ToInt32(InputAge.Value);
 
+                        NEABigFunctions f = new NEABigFunctions();
+                        password = f.Hasher(username, password);
                         
                         con.Open();
                         var command = con.CreateCommand();

@@ -39,6 +39,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.SubtopicSelector = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // InputQ
@@ -141,11 +142,24 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // SubtopicSelector
+            // 
+            this.SubtopicSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SubtopicSelector.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.SubtopicSelector.FormattingEnabled = true;
+            this.SubtopicSelector.Location = new System.Drawing.Point(560, 456);
+            this.SubtopicSelector.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.SubtopicSelector.Name = "SubtopicSelector";
+            this.SubtopicSelector.Size = new System.Drawing.Size(227, 32);
+            this.SubtopicSelector.TabIndex = 20;
+            this.SubtopicSelector.SelectedIndexChanged += new System.EventHandler(this.SubtopicSelector_SelectedIndexChanged);
+            // 
             // CreateMultiC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 504);
+            this.Controls.Add(this.SubtopicSelector);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -177,5 +191,6 @@
         private Label label3;
         private Label label4;
         private Button button2;
+        private ComboBox SubtopicSelector;
     }
 }

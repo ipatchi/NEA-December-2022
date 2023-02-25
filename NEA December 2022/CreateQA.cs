@@ -18,6 +18,29 @@ namespace NEA_December_2022
         {
             id = ID;
             InitializeComponent();
+
+            string where = Directory.GetCurrentDirectory();
+            where = where.Substring(0, where.Length - 24);
+            SqliteConnection con = new SqliteConnection("Data Source = " + where + "/Revision.db;");
+
+
+            //---------------------------------------------------------------
+
+            con.Open();
+            string sql = "SELECT SUBTOPIC FROM QUESTIONS;";
+            using var cmd = new SqliteCommand(sql, con);
+            using SqliteDataReader reader = cmd.ExecuteReader();
+            List<string> subtopics = new List<string>();
+            while (reader.Read())
+            {
+                string s = reader.GetString(0);
+                if (!(subtopics.Contains(s)))
+                {
+                    subtopics.Add(s);
+                }
+
+            }
+            SubtopicSelector.DataSource = subtopics;
         }
 
         //---------------------------------------Answer Box-------------------------------
@@ -109,11 +132,12 @@ namespace NEA_December_2022
                 int Marks = Convert.ToInt16(MarksInp.Value);
                 int type = 1;
 
+                string subtopic = SubtopicSelector.Text;
 
                 con.Open();
           
                 var command1 = con.CreateCommand();
-                string sql1 = "INSERT into Questions (CreatorID, Type, Question)VALUES ('" + CID + "','" + type + "','" + Question + "');";
+                string sql1 = "INSERT into Questions (CreatorID, Type, Question, Subtopic)VALUES ('" + CID + "','" + type + "','" + Question + "','" + subtopic + "');";
                 command1.CommandText = sql1;
                 command1.ExecuteNonQuery();
 
@@ -163,6 +187,11 @@ namespace NEA_December_2022
             this.Hide();
             Form.Show();
             Form.BackColor = this.BackColor;
+        }
+
+        private void SubtopicSelector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
     

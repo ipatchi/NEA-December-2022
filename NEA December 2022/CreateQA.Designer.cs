@@ -49,9 +49,15 @@
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.Font = new System.Windows.Forms.ToolStripButton();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.CreateButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label3 = new System.Windows.Forms.Label();
             this.MarksInp = new System.Windows.Forms.NumericUpDown();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.SubtopicSelector = new System.Windows.Forms.ComboBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.colorDialog3 = new System.Windows.Forms.ColorDialog();
@@ -64,15 +70,16 @@
             this.toolStrip2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.flowLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MarksInp)).BeginInit();
+            this.flowLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.tableLayoutPanel1);
-            this.flowLayoutPanel1.Controls.Add(this.CreateButton);
-            this.flowLayoutPanel1.Controls.Add(this.button1);
-            this.flowLayoutPanel1.Controls.Add(this.MarksInp);
+            this.flowLayoutPanel1.Controls.Add(this.tableLayoutPanel2);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -282,11 +289,29 @@
             this.Font.Text = "Font";
             this.Font.Click += new System.EventHandler(this.toolStripButton9_Click);
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.CreateButton, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.button1, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel4, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel5, 1, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 249);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(785, 161);
+            this.tableLayoutPanel2.TabIndex = 22;
+            // 
             // CreateButton
             // 
-            this.CreateButton.Location = new System.Drawing.Point(3, 249);
+            this.CreateButton.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.CreateButton.Location = new System.Drawing.Point(3, 3);
             this.CreateButton.Name = "CreateButton";
-            this.CreateButton.Size = new System.Drawing.Size(183, 23);
+            this.CreateButton.Size = new System.Drawing.Size(183, 35);
             this.CreateButton.TabIndex = 1;
             this.CreateButton.Text = "Create Card";
             this.CreateButton.UseVisualStyleBackColor = true;
@@ -294,7 +319,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(192, 249);
+            this.button1.Location = new System.Drawing.Point(3, 83);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(69, 38);
             this.button1.TabIndex = 2;
@@ -302,9 +327,28 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.Controls.Add(this.label3);
+            this.flowLayoutPanel4.Controls.Add(this.MarksInp);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(395, 83);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(200, 75);
+            this.flowLayoutPanel4.TabIndex = 22;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(3, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(71, 26);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Marks:";
+            // 
             // MarksInp
             // 
-            this.MarksInp.Location = new System.Drawing.Point(267, 249);
+            this.MarksInp.Location = new System.Drawing.Point(80, 3);
             this.MarksInp.Maximum = new decimal(new int[] {
             9,
             0,
@@ -324,6 +368,37 @@
             0,
             0});
             // 
+            // flowLayoutPanel5
+            // 
+            this.flowLayoutPanel5.Controls.Add(this.label4);
+            this.flowLayoutPanel5.Controls.Add(this.SubtopicSelector);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(395, 3);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(387, 74);
+            this.flowLayoutPanel5.TabIndex = 23;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(3, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(93, 26);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Subtopic:";
+            // 
+            // SubtopicSelector
+            // 
+            this.SubtopicSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SubtopicSelector.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.SubtopicSelector.FormattingEnabled = true;
+            this.SubtopicSelector.Location = new System.Drawing.Point(103, 3);
+            this.SubtopicSelector.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.SubtopicSelector.Name = "SubtopicSelector";
+            this.SubtopicSelector.Size = new System.Drawing.Size(227, 32);
+            this.SubtopicSelector.TabIndex = 21;
+            this.SubtopicSelector.SelectedIndexChanged += new System.EventHandler(this.SubtopicSelector_SelectedIndexChanged);
+            // 
             // CreateQA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -342,7 +417,12 @@
             this.flowLayoutPanel3.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MarksInp)).EndInit();
+            this.flowLayoutPanel5.ResumeLayout(false);
+            this.flowLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -379,5 +459,11 @@
         private Button button1;
         private NumericUpDown numericUpDown1;
         private NumericUpDown MarksInp;
+        private TableLayoutPanel tableLayoutPanel2;
+        private FlowLayoutPanel flowLayoutPanel4;
+        private Label label3;
+        private FlowLayoutPanel flowLayoutPanel5;
+        private Label label4;
+        private ComboBox SubtopicSelector;
     }
 }

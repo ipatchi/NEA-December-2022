@@ -36,7 +36,8 @@ namespace NEA_December_2022
             SqliteConnection con = new SqliteConnection("Data Source = "+ where +"/Revision.db;");
             //SqliteConnection con = new SqliteConnection("Data Source = Revision.db;");
 
-
+            NEABigFunctions functions = new NEABigFunctions();
+            string storedpassword = functions.Hasher(username, password);
 
 
             con.Open();
@@ -50,7 +51,7 @@ namespace NEA_December_2022
             //Try login
             if (passwords.Count > 0)
             {
-                if (passwords[0] == password)
+                if (passwords[0] == storedpassword)
                 {
                     //Password is correct so gains access:
 
@@ -62,7 +63,7 @@ namespace NEA_December_2022
 
                     // - Get the Users ID (Useful in parts of the program)
                     List<string> IDs = new List<string>();
-                    string sql2 = "SELECT ID FROM users WHERE username = '" + username + "' AND password = '"+password+"';";
+                    string sql2 = "SELECT ID FROM users WHERE username = '" + username + "' AND password = '"+storedpassword+"';";
                     using var cmd2 = new SqliteCommand(sql2, con);
                     using SqliteDataReader reader2 = cmd2.ExecuteReader();
                     while (reader2.Read())
@@ -90,8 +91,6 @@ namespace NEA_December_2022
 
                     string filename = "PrevColour.txt";
                     File.WriteAllText(filename, colours[0]);
-
-
 
 
                     NEAString Converter = new NEAString();
