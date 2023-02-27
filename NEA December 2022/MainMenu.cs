@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Http;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Xml.Linq;
 
 namespace NEA_December_2022
 {
@@ -23,8 +25,64 @@ namespace NEA_December_2022
             ID = ID2;
 
             GetFact();
+            CheckLogin();
             
         }
+
+        public void CheckLogin()
+        {
+            string where = Directory.GetCurrentDirectory();
+            where = where.Substring(0, where.Length - 24);
+            SqliteConnection con = new SqliteConnection("Data Source = " + where + "/Revision.db;");
+            //SqliteConnection con = new SqliteConnection("Data Source = Revision.db;");
+
+            con.Open();
+            string sql = "SELECT LastLogin FROM users WHERE ID = '" + ID + "';";
+            using var cmd = new SqliteCommand(sql, con);
+            using SqliteDataReader reader = cmd.ExecuteReader();
+            List<string> Times = new List<string>();
+            while (reader.Read())
+            {
+                try
+                {
+                    Times.Add(reader.GetString(0));
+                }
+                catch
+                {
+                    //
+                }
+                
+            }
+            if (Times.Count > 0)
+            {
+                var dt = DateTime.Now;
+                var dt2 = DateTime.Parse(Times[0]);
+
+                var T = dt.Subtract(dt2);
+                label2.Text = "You haven't revised in " + T.TotalSeconds + " Seconds!";
+
+                var command = con.CreateCommand();
+                
+
+                string sql2 = "UPDATE Users SET LastLogin = '" + Convert.ToString(dt) + "'WHERE ID = '" + ID + "';";
+                command.CommandText = sql2;
+                command.ExecuteNonQuery();
+
+                con.Close();
+            }
+            else
+            {
+                var command = con.CreateCommand();
+                var dt = DateTime.Now;
+
+                string sql2 = "UPDATE Users SET LastLogin = '"+ Convert.ToString(dt) +"'WHERE ID = '"+ID+"';";
+                command.CommandText = sql2;
+                command.ExecuteNonQuery();
+
+                con.Close();
+            }
+        }
+
 
         public async void GetFact()
         {
