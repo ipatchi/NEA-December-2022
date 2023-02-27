@@ -10,6 +10,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Http;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace NEA_December_2022
@@ -20,6 +21,17 @@ namespace NEA_December_2022
         {
             InitializeComponent();
             ID = ID2;
+
+            GetFact();
+            
+        }
+
+        public async void GetFact()
+        {
+            var httpClient = new HttpClient();
+            var response = await httpClient.GetAsync("http://numbersapi.com/random");
+            var fact = await response.Content.ReadAsStringAsync();
+            label1.Text = fact;
         }
 
         public int ID;
@@ -55,6 +67,11 @@ namespace NEA_December_2022
             form.Show();
             this.Hide();
             form.BackColor = this.BackColor;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            GetFact();
         }
     }
 }

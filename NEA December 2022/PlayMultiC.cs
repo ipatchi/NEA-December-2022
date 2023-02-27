@@ -17,6 +17,7 @@ namespace NEA_December_2022
     {
         public int id;
         public int Qid;
+        const int Marks = 1;
         public Form wherecamefrom;
         public PlayMultiC(int ID, int QID)
         {
@@ -95,7 +96,7 @@ namespace NEA_December_2022
                 MessageBox.Show("Correct!");
                 Random random = new Random();
                 wherecamefrom.Show();
-                wherecamefrom.Text = "1" + Qid + random.Next();
+                wherecamefrom.Text = "1" + Marks + Qid + random.Next();
                 this.Hide();
          
 
@@ -171,7 +172,7 @@ namespace NEA_December_2022
                 Random random= new Random();
                 
                 wherecamefrom.Show();
-                wherecamefrom.Text = "0" + Qid + random.Next();
+                wherecamefrom.Text = "0" + Marks + Qid + random.Next();
                 
                 
                 this.Hide();
@@ -206,6 +207,41 @@ namespace NEA_December_2022
             f.Show();
             this.Hide();
             f.BackColor = this.BackColor;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+            List<string> IDs = new List<string>();
+            string where = Directory.GetCurrentDirectory();
+            where = where.Substring(0, where.Length - 24);
+            SqliteConnection con = new SqliteConnection("Data Source = " + where + "/Revision.db;");
+            //SqliteConnection con = new SqliteConnection("Data Source = Revision.db;");
+            con.Open();
+            string sql = "SELECT QuestionID FROM Completed WHERE QuestionID = '" + Qid + "' AND UserID = '" + id + "';";
+            using var cmd = new SqliteCommand(sql, con);
+            using SqliteDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                IDs.Add(reader.GetString(0));
+            }
+            if (IDs.Count > 0)
+            {
+                //Has already done question
+            }
+
+
+            con.Open();
+            var command = con.CreateCommand();
+            string sql2 = "INSERT into Flagged (UserID, QuestionID) VALUES ('" + id + "','" + Qid + "');";
+            command.CommandText = sql2;
+            
+            command.ExecuteNonQuery();
+            MessageBox.Show("Question Successfully Flagged For You!");
+            con.Close();
+
+            //-------------------------------------------------------------------------------------------------------------
+    
         }
     }
 }

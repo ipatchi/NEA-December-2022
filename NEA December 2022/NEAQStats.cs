@@ -13,6 +13,15 @@ namespace NEA_December_2022
 
             
         }
+        public int SumIntArray(int[] ar)
+        {
+            int n = 0;
+            foreach (int i in ar)
+            {
+                n += i;
+            }
+            return n;
+        }
 
         public double Difficulty(double AvgQuestionScore, double thevariance, double Userscore, bool flagged) //Function to return the arbitery Difficulty value
         {

@@ -19,16 +19,29 @@ namespace NEA_December_2022
     {
         public int userid = 0;
         public string DIFF;
-        public BigQuiz(int ID, string difficulty)
+        public BigQuiz(int ID, string difficulty, int[] p = null)
         {
             userid = ID;
             DIFF = difficulty;
             InitializeComponent();
 
+            if (DIFF == "NEAFILEUPLOAD")
+            {
+                playlist[0] = p[0];
+                playlist[1] = p[1];
+                playlist[2] = p[2];
+                playlist[3] = p[3];
+                playlist[4] = p[4];
+            }
+
         }
+
+        
+
 
         public int[] playlist = new int[5];
         public int[] Scores = new int[5];
+        public int[] TMarks = new int[5];
         public int i = 0;
 
 
@@ -117,9 +130,10 @@ namespace NEA_December_2022
             }
             
         }
-        public void registerScore(int score)
+        public void registerScore(int score, int Tmark)
         {
             Scores[i - 1] = score;
+            TMarks[i - 1] = Tmark;
             start_next_q();
         }
 
@@ -136,7 +150,7 @@ namespace NEA_December_2022
             else
             {
                 MessageBox.Show("Quiz Completed");
-                var f = new TestResults(userid);
+                var f = new TestResults(userid,Scores, TMarks);
                 f.Show();
                 f.BackColor = this.BackColor;
                 this.Close();
@@ -147,12 +161,8 @@ namespace NEA_December_2022
         {
             button1.Hide();
 
-            
-
             //Get all average scores for each question
         
-          
-
             string where = Directory.GetCurrentDirectory();
             where = where.Substring(0, where.Length - 24);
             SqliteConnection con = new SqliteConnection("Data Source = " + where + "/Revision.db;");
@@ -167,6 +177,7 @@ namespace NEA_December_2022
             List<double> OverallAverages = new List<double>();
             List<double> OverallVariances = new List<double>();
             List<double> UserAverages = new List<double>();
+            List<bool> UserFlags = new List<bool>();
 
             while (reader.Read())
             {
@@ -218,6 +229,28 @@ namespace NEA_December_2022
                 }
             }
 
+
+            foreach (int TID in IDs) //-------------------- Get User Flags --------------------------------
+            {
+                string sql3 = "SELECT Score FROM Flagged WHERE QuestionID = '" + TID + "' AND UserID = '" + userid + "';";
+                using var cmd3 = new SqliteCommand(sql3, con);
+                using SqliteDataReader reader3 = cmd3.ExecuteReader();
+                List<double> EveryScore = new List<double>();
+                while (reader3.Read())
+                {
+                    EveryScore.Add(Convert.ToInt32(reader3.GetString(0)));
+                }
+                if (EveryScore.Count > 0)
+                {
+                    NEASortSearch s = new NEASortSearch();
+                    UserFlags.Add(true);
+                }
+                else
+                {
+                    UserFlags.Add(false);
+                }
+            }
+
             List<double> Difficulties = new List<double>();
 
             NEAQStats stat = new NEAQStats();
@@ -226,7 +259,7 @@ namespace NEA_December_2022
             {
                 string s = "Averages:" + OverallAverages[i] + " Variances:" + OverallVariances[i] + " Useravgs: " + UserAverages[i] + " Hence Difficulty: " + stat.Difficulty(OverallAverages[i] + 0.1, OverallVariances[i], UserAverages[i], false);
                 //MessageBox.Show(s);
-                Difficulties.Add(stat.Difficulty(OverallAverages[i] + 0.1, OverallVariances[i], UserAverages[i], false));
+                Difficulties.Add(stat.Difficulty(OverallAverages[i] + 0.1, OverallVariances[i], UserAverages[i], UserFlags[i]));
             }
 
             var QuestionTree = new BinaryTree<int>();
@@ -293,7 +326,7 @@ namespace NEA_December_2022
         {
             if (!(this.Text == "NEA Big Quiz"))
             {
-                registerScore(Convert.ToInt32(this.Text[0]) - 48);
+                registerScore(Convert.ToInt32(this.Text[0]) - 48, Convert.ToInt32(this.Text[1]) - 48);
                 this.Text = "NEA Big Quiz";
             }
         
