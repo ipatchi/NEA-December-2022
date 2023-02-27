@@ -232,7 +232,7 @@ namespace NEA_December_2022
 
             foreach (int TID in IDs) //-------------------- Get User Flags --------------------------------
             {
-                string sql3 = "SELECT Score FROM Flagged WHERE QuestionID = '" + TID + "' AND UserID = '" + userid + "';";
+                string sql3 = "SELECT UserID FROM Flagged WHERE QuestionID = '" + TID + "' AND UserID = '" + userid + "';";
                 using var cmd3 = new SqliteCommand(sql3, con);
                 using SqliteDataReader reader3 = cmd3.ExecuteReader();
                 List<double> EveryScore = new List<double>();
